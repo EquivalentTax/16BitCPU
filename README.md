@@ -1,3 +1,3 @@
 # 16 Bit CPU
-16 bit CPU designed for partial fulfillment of B.Tech. program.
 These are the source codes of various components of the CPU to be implemented in Vivado.
+Implemented simple addition of 2 and 3 to return 5 as the output.
