@@ -97,39 +97,9 @@ Write-Back: The Register_File updates R1 with 5 on the next clock edge.
 
 Note: Simulation screenshots are available in the /img directory.
 
-Challenges & Solutions
-
-1. The "Empty Design" Error
-
-Problem: During implementation, Vivado optimized away the entire CPU logic because no top-level outputs were assigned to physical pins.
-
-Solution: Added debug_pc and debug_alu output ports to the top-level entity, forcing the synthesis tool to keep the logic intact.
-
-2. The "Uninitialized" (U) State
-
-Problem: The Program Counter (PC) started in a U state. In VHDL, U + 1 = U, causing the simulation to hang in an unknown state.
-
-Solution: Implemented a robust Asynchronous Reset process.
-
-process(clk, rst)
-begin
-    if rst = '1' then
-        PC <= (others => '0'); -- Forces PC to valid '0'
-    elsif rising_edge(clk) then
-        -- Normal Operation
-    end if;
-end process;
 
 
-Future Scope
-
-Pipelining: Implementing a 5-stage pipeline (IF, ID, EX, MEM, WB) to improve throughput.
-
-FPGA Implementation: Mapping the design to an Artix-7 Board (Basys3) and connecting the debug_out ports to 7-Segment Displays.
-
-IO Peripherals: Adding a UART module for serial communication with a PC.
-
-References
+# References
 
 Patterson, D. A., & Hennessy, J. L. (2020). Computer Organization and Design RISC-V Edition. Morgan Kaufmann.
 
@@ -139,7 +109,7 @@ Xilinx Inc. (2023). Vivado Design Suite User Guide.
 
 IEEE Standard 1076-2008. IEEE Standard VHDL Language Reference Manual.
 
-Directory Structure
+# Directory Structure
 
 .
 ├── src/               # VHDL Source Files
@@ -152,3 +122,54 @@ Directory Structure
 │   └── cpu_tb.vhd     # Testbench
 ├── img/               # Waveform Screenshots & Diagrams
 └── README.md          # This Report
+
+# CPU Testbench
+
+entity cpu_tb is
+-- Empty entity for testbench
+end cpu_tb;
+
+architecture Behavioral of cpu_tb is
+    -- Component Declaration for your CPU
+    component your_cpu_entity
+    port( ... ); -- copy ports from your CPU
+    end component;
+    
+    -- Inputs
+    signal clk : std_logic := '0';
+    signal rst : std_logic := '0';
+    -- Outputs (Signals to observe)
+    ...
+    
+    -- Clock period definition
+    constant clk_period : time := 10 ns;
+ 
+begin
+    -- Instantiate the Unit Under Test (UUT)
+    uut: your_cpu_entity PORT MAP (
+          clk => clk,
+          rst => rst,
+          ...
+        );
+
+    -- Clock process definitions
+    clk_process :process
+    begin
+        clk <= '0';
+        wait for clk_period/2;
+        clk <= '1';
+        wait for clk_period/2;
+    end process;
+
+    -- Stimulus process
+    stim_proc: process
+    begin		
+        -- hold reset state for 100 ns.
+        rst <= '1';
+        wait for 100 ns;	
+        rst <= '0'; -- Release reset, CPU starts here!
+        wait;
+    end process;
+end Behavioral;
+
+
