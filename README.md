@@ -5,7 +5,7 @@ Abstract
 
 This project presents the design, synthesis, and simulation of a 16-bit RISC (Reduced Instruction Set Computer) processor. The processor is implemented using VHDL and simulated within the Xilinx Vivado environment. The architecture is inspired by the Harvard Architecture, featuring separate instruction and data memories to optimize the fetch-execute cycle. The core supports a custom Instruction Set Architecture (ISA) including arithmetic, logical, memory access, and control flow operations.
 
- Features & Specifications
+# Features & Specifications
 
 Architecture: 16-bit RISC, Harvard Architecture.
 
@@ -23,7 +23,7 @@ Control Unit: FSM-based (Finite State Machine) with Fetch-Decode-Execute states.
 
 Reset Logic: Asynchronous Active-High Reset.
 
- System Architecture
+# System Architecture
 
 The processor consists of two main subsystems: the Datapath and the Control Unit.
 
@@ -65,81 +65,9 @@ R-Type (Register): [ Opcode (4) | Rd (3) | Rs1 (3) | Rs2 (3) | Unused (3) ]
 
 I-Type (Immediate): [ Opcode (4) | Rd (3) | Rs1 (3) | Immediate (6) ]
 
-Supported Instructions
 
-Mnemonic
 
-Type
-
-Function
-
-Operation
-
-ADD
-
-R-Type
-
-Addition
-
-Rd = Rs1 + Rs2
-
-SUB
-
-R-Type
-
-Subtraction
-
-Rd = Rs1 - Rs2
-
-AND
-
-R-Type
-
-Bitwise AND
-
-Rd = Rs1 & Rs2
-
-ADDI
-
-I-Type
-
-Add Immediate
-
-Rd = Rs1 + Imm
-
-LW
-
-I-Type
-
-Load Word
-
-Rd = MEM[Rs1]
-
-SW
-
-I-Type
-
-Store Word
-
-MEM[Rs1] = Rd
-
-BEQ
-
-I-Type
-
-Branch Equal
-
-If Rs1==Rs2, PC = PC + Imm
-
-JMP
-
-J-Type
-
-Jump
-
-PC = Target Address
-
-Simulation & Verification
+# Simulation & Verification
 
 The design was verified using a VHDL Testbench (cpu_tb.vhd) which generates the Master Clock (clk) and Reset (rst) signals.
 
