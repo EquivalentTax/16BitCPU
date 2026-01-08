@@ -113,20 +113,29 @@ IEEE Standard 1076-2008. IEEE Standard VHDL Language Reference Manual.
 
 .
 ├── src/               # VHDL Source Files
+
 │   ├── cpu_top.vhd    # Top Level Module
+
 │   ├── alu.vhd        # Arithmetic Logic Unit
+
 │   ├── control_unit.vhd
+
 │   ├── ram.vhd
+
 │   └── rom.vhd
+
 ├── sim/               # Simulation Files
+
 │   └── cpu_tb.vhd     # Testbench
+
 ├── img/               # Waveform Screenshots & Diagrams
+
 └── README.md          # This Report
 
 # CPU Testbench
 
 entity cpu_tb is
--- Empty entity for testbench
+Empty entity for testbench
 end cpu_tb;
 
 architecture Behavioral of cpu_tb is
