@@ -132,53 +132,5 @@ IEEE Standard 1076-2008. IEEE Standard VHDL Language Reference Manual.
 
 └── README.md          # This Report
 
-# CPU Testbench
-
-entity cpu_tb is
-Empty entity for testbench
-end cpu_tb;
-
-architecture Behavioral of cpu_tb is
-    -- Component Declaration for your CPU
-    component your_cpu_entity
-    port( ... ); -- copy ports from your CPU
-    end component;
-    
-    -- Inputs
-    signal clk : std_logic := '0';
-    signal rst : std_logic := '0';
-    -- Outputs (Signals to observe)
-    ...
-    
-    -- Clock period definition
-    constant clk_period : time := 10 ns;
- 
-begin
-    -- Instantiate the Unit Under Test (UUT)
-    uut: your_cpu_entity PORT MAP (
-          clk => clk,
-          rst => rst,
-          ...
-        );
-
-    -- Clock process definitions
-    clk_process :process
-    begin
-        clk <= '0';
-        wait for clk_period/2;
-        clk <= '1';
-        wait for clk_period/2;
-    end process;
-
-    -- Stimulus process
-    stim_proc: process
-    begin		
-        -- hold reset state for 100 ns.
-        rst <= '1';
-        wait for 100 ns;	
-        rst <= '0'; -- Release reset, CPU starts here!
-        wait;
-    end process;
-end Behavioral;
 
 
